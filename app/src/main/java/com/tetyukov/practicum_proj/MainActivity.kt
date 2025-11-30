@@ -1,16 +1,21 @@
 package com.tetyukov.practicum_proj
 
-import android.content.Intent
+import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tetyukov.practicum_proj.ui.theme.Practicum_projTheme
@@ -20,20 +25,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Practicum_projTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MainScreen()
-                }
+                val navController = rememberNavController()
+                PlaylistHost(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun MainScreen() {
-    val context = LocalContext.current
+fun MainScreen(
+    onSearchClick: () -> Unit,
+    onSettingsClick: () -> Unit
+) {
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -48,39 +51,33 @@ fun MainScreen() {
         }
 
         item {
-            CheckboxItem(
+            MenuItem(
                 text = "Поиск",
-                checked = false,
-                onCheckedChange = {
-                    val intent = Intent(context, SearchActivity::class.java)
-                    context.startActivity(intent)
+                onClick = {
+                    onSearchClick()
                 }
             )
         }
 
         item {
-            CheckboxItem(
+            MenuItem(
                 text = "Плейлисты",
-                checked = true,
-                onCheckedChange = { /* Обработка переключения */ }
+                onClick = { /* Обработка нажатия */ }
             )
         }
 
         item {
-            CheckboxItem(
+            MenuItem(
                 text = "Избранное",
-                checked = false,
-                onCheckedChange = { /* Обработка переключения */ }
+                onClick = { /* Обработка нажатия */ }
             )
         }
 
         item {
-            CheckboxItem(
+            MenuItem(
                 text = "Настройки",
-                checked = false,
-                onCheckedChange = {
-                    val intent = Intent(context, SettingsActivity::class.java)
-                    context.startActivity(intent)
+                onClick = {
+                    onSettingsClick()
                 }
             )
         }
@@ -88,15 +85,15 @@ fun MainScreen() {
 }
 
 @Composable
-fun CheckboxItem(
+fun MenuItem(
     text: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
+    onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .clickable { onClick() }
+            .padding(vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -104,9 +101,10 @@ fun CheckboxItem(
             text = text,
             style = MaterialTheme.typography.bodyLarge
         )
-        Checkbox(
-            checked = checked,
-            onCheckedChange = onCheckedChange
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            contentDescription = "Перейти",
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
@@ -115,7 +113,10 @@ fun CheckboxItem(
 @Composable
 fun DefaultPreview() {
     Practicum_projTheme {
-        MainScreen()
+        MainScreen(
+            onSearchClick = {},
+            onSettingsClick = {}
+        )
     }
 }
 
@@ -123,6 +124,9 @@ fun DefaultPreview() {
 @Composable
 fun DarkPreview() {
     Practicum_projTheme(darkTheme = true) {
-        MainScreen()
+        MainScreen(
+            onSearchClick = {},
+            onSettingsClick = {}
+        )
     }
 }

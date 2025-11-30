@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.practicum_proj" // You can change this to your desired package name
+    namespace = "com.tetyukov.practicum_proj" // You can change this to your desired package name
     compileSdk = 36 // This value might need to be adjusted based on your project's target API
 
     defaultConfig {
-        applicationId = "com.example.practicum_proj" // You can change this as well
+        applicationId = "com.tetyukov.practicum_proj" // You can change this as well
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.compose.ui:ui:1.5.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
