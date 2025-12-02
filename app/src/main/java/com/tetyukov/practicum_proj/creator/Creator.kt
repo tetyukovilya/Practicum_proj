@@ -6,15 +6,16 @@ import com.tetyukov.practicum_proj.data.repository.TracksRepositoryImpl
 import com.tetyukov.practicum_proj.domain.TracksRepository
 
 object Creator {
-    // This function will create the repository
-    fun getTracksRepository(context: Context): TracksRepository {
-        // First, create an instance of your Storage
-        val storage = Storage()
 
-        // Now, pass BOTH storage and context to the RetrofitNetworkClient constructor
+
+    fun getTracksRepository(context: Context): TracksRepository {
+        // Если Storage требует контекст — передаём его
+        val storage = Storage(context)
+
+        // Инициализируем сетевой клиент с storage и контекстом
         val networkClient = RetrofitNetworkClient(storage, context)
 
-        // Finally, create the repository
+        // Возвращаем репозиторий
         return TracksRepositoryImpl(networkClient)
     }
 }

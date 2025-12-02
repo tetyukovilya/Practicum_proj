@@ -1,59 +1,60 @@
 package com.tetyukov.practicum_proj.creator
 
+import android.content.Context
 import com.tetyukov.practicum_proj.data.dto.TrackDto
 
-class Storage {
+class Storage(context: Context) {
 
     private val listTracks = listOf(
         TrackDto(
             trackName = "Владивосток 2000",
             artistName = "Мумий Троль",
-            trackTimeMillis = 158000 // 2:38
+            trackTimeMillis = "158000" // 2:38
         ),
         TrackDto(
             trackName = "Группа крови",
             artistName = "Кино",
-            trackTimeMillis = 283000 // 4:43
+            trackTimeMillis = "283000" // 4:43
         ),
         TrackDto(
             trackName = "Не смотри назад",
             artistName = "Ария",
-            trackTimeMillis = 312000 // 5:12
+            trackTimeMillis = "312000" // 5:12
         ),
         TrackDto(
             trackName = "Звезда по имени Солнце",
             artistName = "Кино",
-            trackTimeMillis = 225000
+            trackTimeMillis = "225000"
         ),
         TrackDto(
             trackName = "Лондон",
             artistName = "Аквариум",
-            trackTimeMillis = 272000
+            trackTimeMillis = "272000"
         ),
         TrackDto(
             trackName = "На заре",
             artistName = "Альянс",
-            trackTimeMillis = 230000
+            trackTimeMillis = "230000"
         ),
         TrackDto(
             trackName = "Перемен",
             artistName = "Кино",
-            trackTimeMillis = 296000
+            trackTimeMillis = "296000"
         ),
         TrackDto(
             trackName = "Розовый фламинго",
             artistName = "Сплин",
-            trackTimeMillis = 195000
+            trackTimeMillis = "195000"
         ),
         TrackDto(
             trackName = "Танцевать",
             artistName = "Мельница",
-            trackTimeMillis = 222000
+            trackTimeMillis = "222000"
         ),
         TrackDto(
             trackName = "Чёрный бумер",
             artistName = "Серега",
-            trackTimeMillis = 241000
+            trackTimeMillis = "241000"
         )
     )
 
