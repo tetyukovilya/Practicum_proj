@@ -1,4 +1,4 @@
-package com.tetyukov.practicum_proj.data.dto
+package com.tetyukov.practicum_proj.domain
 
 data class TrackDto(
     val trackName: String,

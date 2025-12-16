@@ -1,6 +1,6 @@
 package com.tetyukov.practicum_proj.ui.AllTracks
 
-import com.tetyukov.practicum_proj.data.dto.TrackDto
+import com.tetyukov.practicum_proj.domain.TrackDto
 
 sealed class SearchState {
     val errorMessage: String

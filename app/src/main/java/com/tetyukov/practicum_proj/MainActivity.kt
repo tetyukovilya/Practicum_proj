@@ -6,6 +6,8 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -18,15 +20,27 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tetyukov.practicum_proj.ui.search.SearchScreen
+import com.tetyukov.practicum_proj.ui.search.SearchViewModel
 import com.tetyukov.practicum_proj.ui.theme.Practicum_projTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val searchViewModel by viewModels<SearchViewModel> {
+        SearchViewModel.getViewModelFactory(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             Practicum_projTheme {
-                val navController = rememberNavController()
-                PlaylistHost(navController = navController)
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    SearchScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        viewModel = searchViewModel
+                    )
+                }
             }
         }
     }

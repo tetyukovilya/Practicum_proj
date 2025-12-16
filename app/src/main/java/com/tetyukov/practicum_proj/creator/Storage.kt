@@ -1,7 +1,7 @@
 package com.tetyukov.practicum_proj.creator
 
 import android.content.Context
-import com.tetyukov.practicum_proj.data.dto.TrackDto
+import com.tetyukov.practicum_proj.domain.TrackDto
 
 class Storage(context: Context) {
 

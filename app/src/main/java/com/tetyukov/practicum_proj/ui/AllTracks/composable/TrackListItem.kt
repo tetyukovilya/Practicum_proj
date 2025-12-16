@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tetyukov.practicum_proj.R
-import com.tetyukov.practicum_proj.data.dto.TrackDto
+import com.tetyukov.practicum_proj.domain.TrackDto
 
 @Composable
 fun TrackListItem(track: TrackDto) {
