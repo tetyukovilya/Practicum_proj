@@ -14,8 +14,7 @@ fun PlaylistHost(navController: NavHostController) {
         // Main screen
         composable(Screen.MAIN.name) {
             MainScreen(
-                onSearchClick = { navigateToSearch(navController) },
-                onSettingsClick = { navigateToSettings(navController) }
+                onSearchClick = { navigateToSearch(navController) }
             )
         }
 

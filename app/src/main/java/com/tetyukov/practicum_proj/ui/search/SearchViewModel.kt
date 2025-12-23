@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.tetyukov.practicum_proj.creator.Creator
 import com.tetyukov.practicum_proj.domain.TracksRepository
+import com.tetyukov.practicum_proj.ui.AllTracks.SearchState  // ← ДОБАВЬ ИМПОРТ
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,15 +31,13 @@ class SearchViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _searchScreenState.update { SearchState.Searching }
             try {
-                // Важно: предполагается, что searchTracks() может бросать IOException
                 val list = tracksRepository.searchTracks(expression = trimmed)
-                _searchScreenState.update { SearchState.Success(tracks = list) }
+                _searchScreenState.update { SearchState.Success(foundList = list) }  // ← БЫЛО tracks, СТАЛО foundList
             } catch (e: IOException) {
                 _searchScreenState.update {
                     SearchState.Fail(error = e.message ?: "Network error")
                 }
             } catch (e: Exception) {
-                // Подстраховка, чтобы не падать от неожиданных ошибок/парсинга
                 _searchScreenState.update {
                     SearchState.Fail(error = e.message ?: "Unexpected error")
                 }

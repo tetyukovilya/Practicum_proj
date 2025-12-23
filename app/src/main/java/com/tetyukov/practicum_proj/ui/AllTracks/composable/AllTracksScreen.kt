@@ -13,13 +13,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tetyukov.practicum_proj.ui.AllTracks.AllTracksViewModel
 import com.tetyukov.practicum_proj.ui.AllTracks.SearchState
 
 @Composable
 fun AllTracksScreen(viewModel: AllTracksViewModel) {
-    val screenState by viewModel.allTracksScreenState.collectAsState()
+    val screenState by viewModel.allTracksScreenState.collectAsState(initial = SearchState.Initial)
     LaunchedEffect(Unit) {
         viewModel.fetchData()
     }
@@ -28,7 +29,7 @@ fun AllTracksScreen(viewModel: AllTracksViewModel) {
         contentAlignment = Alignment.Center
     ) {
         when (val currentState = screenState) {
-            is SearchState.Loading -> {
+            is SearchState.Searching -> {
                 CircularProgressIndicator()
             }
             is SearchState.Success -> {
@@ -41,18 +42,16 @@ fun AllTracksScreen(viewModel: AllTracksViewModel) {
                             .padding(horizontal = 16.dp)
                     ) {
                         items(currentState.foundList) { track ->
-                            // Your TrackListItem composable will display each track
                             TrackListItem(track = track)
                         }
                     }
                 }
             }
-            is SearchState.Error -> {
-                // Show an error message
-                Text(text = "Error: ${currentState.errorMessage}")
+            is SearchState.Fail -> {  // ← Было Error
+                Text(text = "Error: ${currentState.error}", color = Color.Red)
             }
             is SearchState.Initial -> {
-                // Initially, the screen is empty while it waits for the loading state
+
             }
         }
     }

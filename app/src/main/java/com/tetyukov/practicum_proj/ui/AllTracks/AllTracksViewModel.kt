@@ -26,11 +26,11 @@ class AllTracksViewModel(
     fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _allTracksScreenState.value = SearchState.Loading
+                _allTracksScreenState.value = SearchState.Searching
                 val list = tracksRepository.searchTracks("")
                 _allTracksScreenState.value = SearchState.Success(foundList = list)
             } catch (e: IOException) {
-                _allTracksScreenState.value = SearchState.Error(e.message ?: "Unknown error")
+                _allTracksScreenState.value = SearchState.Fail(e.message ?: "Unknown error")
             }
         }
     }

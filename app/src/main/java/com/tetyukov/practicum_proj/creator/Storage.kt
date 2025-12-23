@@ -62,7 +62,8 @@ class Storage(context: Context) {
         if (expression.isBlank()) return listTracks
         val needle = expression.lowercase()
         return listTracks.filter {
-            it.trackName.lowercase().contains(needle)
+            it.trackName.lowercase().contains(needle) ||
+                    it.artistName.lowercase().contains(needle)
         }
     }
 }

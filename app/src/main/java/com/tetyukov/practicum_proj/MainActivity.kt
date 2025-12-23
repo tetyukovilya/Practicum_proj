@@ -10,9 +10,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -35,11 +40,48 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Practicum_projTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SearchScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        viewModel = searchViewModel
-                    )
+                var selectedScreen by remember { mutableStateOf("home") }
+
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        NavigationBar {
+                            NavigationBarItem(
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Home,
+                                        contentDescription = "Главная"
+                                    )
+                                },
+                                label = { Text("Главная") },
+                                selected = selectedScreen == "home",
+                                onClick = { selectedScreen = "home" }
+                            )
+
+                            NavigationBarItem(
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Search,
+                                        contentDescription = "Поиск"
+                                    )
+                                },
+                                label = { Text("Поиск") },
+                                selected = selectedScreen == "search",
+                                onClick = { selectedScreen = "search" }
+                            )
+                        }
+                    }
+                ) { innerPadding ->
+                    when (selectedScreen) {
+                        "home" -> MainScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            onSearchClick = { selectedScreen = "search" }
+                        )
+                        "search" -> SearchScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            viewModel = searchViewModel
+                        )
+                    }
                 }
             }
         }
@@ -48,12 +90,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(
+    modifier: Modifier = Modifier,
     onSearchClick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit = {}  // ← ДОБАВЬ ЭТО
 ) {
-
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp)
     ) {
         item {
@@ -67,9 +109,7 @@ fun MainScreen(
         item {
             MenuItem(
                 text = "Поиск",
-                onClick = {
-                    onSearchClick()
-                }
+                onClick = onSearchClick
             )
         }
 
@@ -90,9 +130,7 @@ fun MainScreen(
         item {
             MenuItem(
                 text = "Настройки",
-                onClick = {
-                    onSettingsClick()
-                }
+                onClick = onSettingsClick  // ← ИСПОЛЬЗУЙ ЗДЕСЬ
             )
         }
     }
@@ -123,24 +161,3 @@ fun MenuItem(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    Practicum_projTheme {
-        MainScreen(
-            onSearchClick = {},
-            onSettingsClick = {}
-        )
-    }
-}
-
-@Preview(showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun DarkPreview() {
-    Practicum_projTheme(darkTheme = true) {
-        MainScreen(
-            onSearchClick = {},
-            onSettingsClick = {}
-        )
-    }
-}

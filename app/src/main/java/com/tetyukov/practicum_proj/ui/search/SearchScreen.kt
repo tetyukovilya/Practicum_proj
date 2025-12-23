@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tetyukov.practicum_proj.R
 import com.tetyukov.practicum_proj.domain.TrackDto
+import com.tetyukov.practicum_proj.ui.AllTracks.SearchState
 
 @Composable
 fun TrackListItem(track: TrackDto) {
@@ -52,7 +53,7 @@ fun SearchScreen(
     viewModel: SearchViewModel,
     modifier: Modifier = Modifier
 ) {
-    val screenState by viewModel.searchScreenState.collectAsState()
+    val screenState by viewModel.searchScreenState.collectAsState(initial = SearchState.Initial)
     var text by remember { mutableStateOf("") }
 
     Column(
@@ -91,8 +92,7 @@ fun SearchScreen(
             is SearchState.Success -> {
                 LazyColumn(Modifier.fillMaxSize()) {
                     items(
-                        items = state.tracks,
-                        // Если в Track есть id (например trackId), лучше key = { it.trackId }
+                        items = state.foundList,  // ← ИСПРАВЬТе ЗДЕСЬ
                     ) { track ->
                         TrackListItem(track = track)
                         HorizontalDivider(thickness = 0.5.dp)
