@@ -1,4 +1,4 @@
-package com.tetyukov.practicum_proj.ui.components
+    package com.tetyukov.practicum_proj.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack

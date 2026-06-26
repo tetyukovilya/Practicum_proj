@@ -1,7 +1,5 @@
 package com.tetyukov.practicum_proj.ui.viewmodel
 
-import androidx.lifecycle.viewmodel.CreationExtras
-
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

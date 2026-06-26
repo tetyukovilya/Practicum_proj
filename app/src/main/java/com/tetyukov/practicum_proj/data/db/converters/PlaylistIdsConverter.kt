@@ -4,7 +4,8 @@ import androidx.room.TypeConverter
 
 class PlaylistIdsConverter {
     @TypeConverter
-    fun fromPlaylistIds(value: Set<Long>): String = value.joinToString(",")
+    fun fromPlaylistIds(value: Set<Long>):
+            String = value.joinToString(",")
 
     @TypeConverter
     fun toPlaylistIds(value: String): Set<Long> {

@@ -8,7 +8,7 @@ import com.tetyukov.practicum_proj.data.preferences.SearchHistoryPreferences
 import com.tetyukov.practicum_proj.data.repo.PlaylistsRepositoryImpl
 import com.tetyukov.practicum_proj.data.repo.SearchHistoryRepositoryImpl
 import com.tetyukov.practicum_proj.data.repo.TracksRepositoryImpl
-import com.tetyukov.practicum_proj.storage.Storage
+import com.tetyukov.practicum_proj.data.storage.Storage
 import com.tetyukov.practicum_proj.domain.repository.PlaylistsRepository
 import com.tetyukov.practicum_proj.domain.repository.SearchHistoryRepository
 import com.tetyukov.practicum_proj.domain.repository.TracksRepository

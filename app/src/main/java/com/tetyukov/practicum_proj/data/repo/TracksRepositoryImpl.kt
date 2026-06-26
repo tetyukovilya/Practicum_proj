@@ -1,6 +1,6 @@
 package com.tetyukov.practicum_proj.data.repo
 
-import com.tetyukov.practicum_proj.storage.Storage
+import com.tetyukov.practicum_proj.data.storage.Storage
 import com.tetyukov.practicum_proj.data.db.AppDatabase
 import com.tetyukov.practicum_proj.data.db.entity.TrackEntity
 import com.tetyukov.practicum_proj.domain.model.Track
