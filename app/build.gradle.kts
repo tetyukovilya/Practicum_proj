@@ -51,13 +51,16 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.datastore:datastore-preferences:1.1.4")
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.compose.ui:ui:1.5.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.material.icons.extended) // <-- Add this line
+    implementation(libs.androidx.material.icons.extended)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.material.icons.extended)
